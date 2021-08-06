@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="static/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6"></script>
+    <script src="static/jquery-3.6.0.min.js"></script>
+    <script src="static/app.js"></script>
+    <title>Khowarpedia - Word Search</title>
+</head>
+
+<body>
+    <div class="toolbar fixed">
+        <div class="filters">
+            <button class="template alphabet"></button>
+            <button class="">All</button>
+            <button class="">Top</button>
+        </div>
+        <div class="searchbar">
+            <div class="mode">
+                <span data-mode="khowar">KHO</span>
+                <span class="selected" data-mode="en-ur">EN/UR</span>
+            </div>
+            <div class="search">
+                <input type="text" spellcheck="true" placeholder="Enter word"><button class="next">↓</button><button
+                    class="prev">↑</button>
+            </div>
+            <span class="count"></span>
+        </div>
+    </div>
+    <div class="list">
+        <div class="alt">
+            <div></div>
+            <div></div>
+        </div>
+        <table cellspacing="10">
+            <thead>
+                <tr>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="template item">
+                    <td>
+                        <p></p>
+                        <p class="lexeme"></p>
+                    </td>
+                    <td>
+                        <p></p>
+                        <p class="english"></p>
+                    </td>
+                </tr>
+                <!-- <tr>
+                    <td>
+                        <p>word word</p>
+                        <p>lexeme lexeme </p>
+                    </td>
+                    <td>
+                        <p>english english english englishenglish</p>
+                        <p>urdu urdu urdu urdu</p>
+                    </td>
+                </tr> -->
+                <!-- <tr class="template item">
+                    <td></td>
+                    <td class="lexeme"></td>
+                    <td class="english"></td>
+                    <td></td>
+                </tr> -->
+            </tbody>
+    </div>
+    <footer class="fixed">
+        <p>Made with ❤️ from The Village White Rock, Booni ⛰️</p>
+        <p class="attribution">DATA SOURCED FROM <a href="http://www.www.webonary.org/rachitrali">Chitrali, Rehmat Aziz
+                - Khowar Academy.</a></p>
+    </footer>
+</body>
+
+</html>
