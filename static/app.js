@@ -31,16 +31,30 @@ $(document).ready(function () {
     var $list = $(".list tbody");
     var $filters = $(".filters");
 
-    dataset = window.localStorage.getItem("khowar-dataset");
+    window.localStorage.removeItem("khowar-dataset");
+    dataset = window.localStorage.getItem("khowar-alldata");
     
     if (dataset) {
         dataset = JSON.parse(dataset);
         onDatasetLoad();
     }
     else {
-        $.getJSON("dataset/all-latin.json", function (data, status) {
-            dataset = data;
-            window.localStorage.setItem("khowar-dataset", JSON.stringify(data));
+        Promise.all([
+            (new Promise((resolve) => {
+                $.getJSON("dataset_rachitrali/all-latin.json", (data, status) => {
+                    resolve(data);
+                })
+            }))(),
+            (new Promise((resolve) => {
+                $.getJSON("dataset_crowdsourced/all-latin.json", (data, status) => {
+                    resolve(data);
+                })
+            }))(),
+        ]).then(([ datasetOne, datasetTwo ]) => {
+            window.localStorage.setItem("khowar-alldata", JSON.stringify([
+                ...datasetOne,
+                ...datasetTwo,
+            ]));
             onDatasetLoad();
         });
     }
