@@ -5,6 +5,10 @@ var filteredIdx = [];
 var filteredCurrent = -1;
 var mode = "en-ur";
 
+var $scroller;
+var $list;
+var $filters;
+
 var limited = [];
 
 var currentFilter = "1000";
@@ -28,8 +32,9 @@ function prune(limit) {
 
 $(document).ready(function () {
 
-    var $list = $(".list tbody");
-    var $filters = $(".filters");
+    $scroller = $(".list")
+    $list = $(".list tbody");
+    $filters = $(".filters");
 
     window.localStorage.removeItem("khowar-dataset");
     dataset = window.localStorage.getItem("khowar-alldata");
@@ -63,7 +68,7 @@ $(document).ready(function () {
         var config = {
             includeScore: true,
             useExtendedSearch: true,
-            keys: mode === "khowar" ? ['lexeme', 'latin'] : ['translations.english', 'translations.urdu'],
+            keys: mode === "khowar" ? ['lexeme', 'latin', 'word'] : ['translations.english', 'translations.urdu'],
             threshold: 0.01
         }
         fuse = new Fuse(dataset, config);
@@ -90,8 +95,7 @@ $(document).ready(function () {
                 currentFilter = item;
                 $el.addClass("active");
                 var $first = $list.find(`td[data-alphabet='${item}'`)[0];
-                console.log($first, $first.offsetTop + $first.clientTop);
-                window.scrollTo(0, $first.offsetTop + $first.clientTop + 5);
+                $scroller.scrollTop($first.offsetTop + $first.clientTop - 8);
             });
             $el.text(item);
             $filters.append($el);
@@ -111,7 +115,6 @@ $(document).ready(function () {
         if (!$afterEl) {
             $list.append($el);        
         } else {
-            console.log($afterEl);
             $el.insertAfter($afterEl);
             $el = $(`.item[data-id=${index}]`);
         }
@@ -135,7 +138,7 @@ $(document).ready(function () {
     function searchItems(keyword) {
         $("tr.highlight").removeClass("highlight");
         if (!keyword) {
-            window.scrollTo(0, 0);
+            $scroller.scrollTop(0);
             $(".count").text("");    
             return;
         };
@@ -169,11 +172,10 @@ $(document).ready(function () {
         if (!$el.length) {
             // @todo fix this target neighbor index, tricky one
             var $neighbor = $(`td[data-alphabet='${dataset[id].alphabet}']`).last().parent();
-            console.log($neighbor);
             $el = renderItem(dataset[id], id, $neighbor);
         }
         $el.addClass("highlight");
-        window.scrollTo(0, $el[0].offsetTop + $el[0].clientTop + 24);
+        $scroller.scrollTop($el[0].offsetTop + $el[0].clientTop - 8);
     }
 
     function goToNextItem() {
@@ -220,6 +222,8 @@ $(document).ready(function () {
         $target.addClass("selected");
         mode = $target.attr("data-mode");
         setMode();
+        searchItems($(".searchbar input").val());
+        $(".searchbar input").focus()
     });
 
 });

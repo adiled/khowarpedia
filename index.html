@@ -13,69 +13,58 @@
 </head>
 
 <body>
-    <div class="toolbar fixed">
+    <div id="body">
+        <div class="toolbar">
+            <div class="searchbar">
+                <div class="mode">
+                    <span data-mode="khowar" role="button">KHW</span>
+                    <span class="selected" data-mode="en-ur" role="button">EN/UR</span>
+                </div>
+                <div class="search">
+                    <input type="text" spellcheck="true" placeholder="🔎  Enter word">
+                    <button class="next">↓</button>
+                    <button class="prev">↑</button>
+                </div>
+                <span class="count"></span>
+            </div>
+        </div>
         <div class="filters">
             <button class="template alphabet"></button>
             <button class="">All</button>
             <button class="">Top</button>
         </div>
-        <div class="searchbar">
-            <div class="mode">
-                <span data-mode="khowar">KHO</span>
-                <span class="selected" data-mode="en-ur">EN/UR</span>
+        <div class="list">
+            <div class="alt">
+                <div></div>
+                <div></div>
             </div>
-            <div class="search">
-                <input type="text" spellcheck="true" placeholder="Enter word"><button class="next">↓</button><button
-                    class="prev">↑</button>
-            </div>
-            <span class="count"></span>
+            <table cellspacing="10">
+                <thead>
+                    <tr>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="template item">
+                        <td>
+                            <p></p>
+                            <p class="lexeme"></p>
+                        </td>
+                        <td>
+                            <p></p>
+                            <p class="english"></p>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
+        <footer>
+            <p>Made with ❤️ from The Village White Rock, Booni ⛰️</p>
+            <p class="attribution">
+                PRIMARY DATA SOURCE — <a href="http://www.www.webonary.org/rachitrali">Chitrali, Rehmat Aziz - Khowar Academy.</a>
+            </p>
+        </footer>
     </div>
-    <div class="list">
-        <div class="alt">
-            <div></div>
-            <div></div>
-        </div>
-        <table cellspacing="10">
-            <thead>
-                <tr>
-                    <th></th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr class="template item">
-                    <td>
-                        <p></p>
-                        <p class="lexeme"></p>
-                    </td>
-                    <td>
-                        <p></p>
-                        <p class="english"></p>
-                    </td>
-                </tr>
-                <!-- <tr>
-                    <td>
-                        <p>word word</p>
-                        <p>lexeme lexeme </p>
-                    </td>
-                    <td>
-                        <p>english english english englishenglish</p>
-                        <p>urdu urdu urdu urdu</p>
-                    </td>
-                </tr> -->
-                <!-- <tr class="template item">
-                    <td></td>
-                    <td class="lexeme"></td>
-                    <td class="english"></td>
-                    <td></td>
-                </tr> -->
-            </tbody>
-    </div>
-    <footer class="fixed">
-        <p>Made with ❤️ from The Village White Rock, Booni ⛰️</p>
-        <p class="attribution">DATA SOURCED FROM <a href="http://www.www.webonary.org/rachitrali">Chitrali, Rehmat Aziz
-                - Khowar Academy.</a></p>
-    </footer>
 </body>
 
 </html>

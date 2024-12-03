@@ -26,9 +26,19 @@
 }
 
 body {
+    margin: 0;
+    padding: 0;
+}
+
+#body {
+    height: 100vh;
+    display: grid;
+    grid-template-areas: 'toolbar toolbar'
+    'filters list'
+    'footer footer';
+    grid-template-columns: min-content 1fr;
+    overflow: hidden;
     text-align: right;
-    padding-top: 15px;
-    padding-bottom: 30px;
 }
 
 .fixed {
@@ -51,7 +61,8 @@ table {
 }
 
 .list {
-    padding-top: 110px;
+    grid-area: list;
+    overflow: scroll;
     font-size: 26px;
     font-family: "Scheherazade", serif;
     -webkit-locale: "khw-Arab";
@@ -62,11 +73,13 @@ table {
 }
 
 .toolbar {
+    grid-area: toolbar;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: space-between;
-    padding: 5px 1%;
+    gap: 6px;
+    padding: 2px 1%;
     width: 100%;
     box-sizing: border-box;
     background-color: #fff;
@@ -76,31 +89,34 @@ table {
 }
 
 .filters {
-    position: relative;
-    width: 100%;
+    grid-area: filters;
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
     text-align: center;
-    overflow-x: scroll;
-    margin: 5px 0;
+    overflow-y: auto;
 }
 
 .filters::-webkit-scrollbar {
     display: none;
 }
 
+.list {
+    grid-area: list;
+}
+
+[role="button"], button {
+    cursor: pointer;
+}
+
 .searchbar {
-    padding: 5px 0;
     display: flex;
+    gap: 2px;
     min-width: 320px;
     align-items: center;
     justify-content: center;
     font-family: sans-serif;
-}
-
-.searchbar > * {
-    margin: 0 5px;
 }
 
 .searchbar .count {
@@ -111,11 +127,12 @@ table {
 
 .searchbar input {
     max-width: 120px;
+    caret-color: #0fb2ab;
 }
 
 .searchbar .search input:focus {
     border: 0;
-    border-bottom: 1px solid #000;
+    border-bottom: 1px solid #0fb2ab;
     box-shadow: none;
     outline: none;
 }
@@ -124,10 +141,11 @@ table {
     width: 20px;
     padding-left: 0 !important;
     padding-right: 0 !important;
+    padding: 10px;
 }
 
-.searchbar button {
-    padding: 10px;
+.searchbar button:active {
+    color: green;
 }
 
 .searchbar .mode {
@@ -137,10 +155,15 @@ table {
 
 .searchbar .mode > span {
     padding: 0 2px;
+    border-radius: 2px;
+    background: #aaaaaa10;
+    border: 1px solid #aaa;
 }
 
 .searchbar .mode > span.selected {
     color: #0fb2ab;
+    background: #0fb2aa10;
+    border: 1px solid #0fb2ab;
 }
 
 .searchbar .search {
@@ -165,7 +188,6 @@ table {
     height: 32px;
     border-radius: 2px;
     border: 1px solid #c6c6c6;
-    cursor: pointer;
     color: #575757;
     background-color: #fff;
 }
@@ -206,6 +228,11 @@ td p.english {
 }
 
 footer {
+    grid-area: footer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
     left: 0;
     bottom: 0;
     padding: 2px 0;
@@ -215,6 +242,12 @@ footer {
     font-size: 12px;
     font-weight: bold;
     text-align: center;
+}
+
+@media screen and (max-width: 700px) {
+    footer {
+        justify-content: space-around;
+    }
 }
 
 footer p {
