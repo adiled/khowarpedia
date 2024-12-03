@@ -44,12 +44,12 @@ $(document).ready(function () {
                 $.getJSON("dataset_rachitrali/all-latin.json", (data, status) => {
                     resolve(data);
                 })
-            }))(),
+            })),
             (new Promise((resolve) => {
                 $.getJSON("dataset_crowdsourced/all-latin.json", (data, status) => {
                     resolve(data);
                 })
-            }))(),
+            })),
         ]).then(([ datasetOne, datasetTwo ]) => {
             window.localStorage.setItem("khowar-alldata", JSON.stringify([
                 ...datasetOne,
