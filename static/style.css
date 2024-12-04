@@ -25,26 +25,32 @@
     src: url(AwamiNastaliq-Regular.woff2) format("woff2");
 }
 
-body {
+html, body {
     margin: 0;
     padding: 0;
+    height: 100%;
+}
+
+label {
+    font-family: sans-serif;
+    vertical-align: middle;
+}
+
+input[type="checkbox"] {
+    vertical-align: middle;
 }
 
 #body {
-    height: 100vh;
+    position: relative;
+    height: 100%;
     display: grid;
     grid-template-areas: 'toolbar toolbar'
     'filters list'
     'footer footer';
     grid-template-columns: min-content 1fr;
     overflow: hidden;
+    box-sizing: border-box;
     text-align: right;
-}
-
-.fixed {
-    position: fixed;
-    width: 100%;
-    -webkit-backface-visibility: hidden;
 }
 
 *.template,
@@ -56,36 +62,38 @@ button.template {
     display: none;
 }
 
-table {
-    direction: rtl;
-}
-
-.list {
-    grid-area: list;
-    overflow: scroll;
-    font-size: 26px;
-    font-family: "Scheherazade", serif;
-    -webkit-locale: "khw-Arab";
-}
-
-.list .alt {
-    direction: rtl;
-}
-
 .toolbar {
     grid-area: toolbar;
     display: flex;
-    flex-direction: column;
     align-items: center;
-    justify-content: space-between;
-    gap: 6px;
-    padding: 2px 1%;
+    justify-content: center;
+    gap: 8px;
+    padding: 4px 1%;
     width: 100%;
     box-sizing: border-box;
     background-color: #fff;
     box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.06);
     top: 0;
     left: 0;
+    font-family: sans-serif;
+    min-width: 320px;
+}
+
+@media screen and (max-width: 425px) {
+    .toolbar {
+        position: fixed;
+        top: 100%;
+        transform: translateY(-100%);
+        flex-direction: column;
+        box-shadow: 0 -1px 2px 0 rgba(0, 0, 0, 0.06);
+    }
+
+    #body {
+        grid-template-areas: 'footer footer'
+        'filters list'
+        'toolbar toolbar';
+        padding-bottom: 70px;
+    }
 }
 
 .filters {
@@ -109,21 +117,28 @@ table {
 .searchbar {
     display: flex;
     gap: 2px;
-    min-width: 320px;
     align-items: center;
     justify-content: center;
-    font-family: sans-serif;
 }
 
-.searchbar .count {
-    font-size: 12px;
-    color: gray;
-    min-width: 32px;
+.counting {
+    position: absolute;
+    right: 12px;
+    font-size: 14px;
+    color: black;
+    margin-left: auto;
 }
 
 .searchbar input {
     max-width: 120px;
     caret-color: #0fb2ab;
+}
+
+.searchbar .search {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
 }
 
 .searchbar .search input:focus {
@@ -133,30 +148,64 @@ table {
     outline: none;
 }
 
-.searchbar button {
-    width: 20px;
-    padding-left: 0 !important;
-    padding-right: 0 !important;
-    padding: 10px;
+.searchbar .search button {
+    width: 24px;
+    height: 24px;
+    font-size: 18px;
+    line-height: 18px;
+    border: 0;
+    background: transparent;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    vertical-align: middle;
 }
 
 .searchbar button:active {
     color: green;
 }
 
-.searchbar .mode {
+.config {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.explorer {
+    border: 1px solid #aaa;
+    border-radius: 6px;
+    padding: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    font-size: 12px;
+    box-shadow: 1px 1px 2px 2px #00000010;
+}
+
+.explorer:has(> input:checked) {
+    box-shadow: none;
+}
+
+.explorer input, .explorer label {
+    margin: 0;
+    padding: 0;
+}
+
+.mode {
     font-size: 12px;
     color: #aaa;
 }
 
-.searchbar .mode > span {
-    padding: 0 2px;
+.mode > span {
+    padding: 2px 4px;
     border-radius: 2px;
     background: #aaaaaa10;
     border: 1px solid #aaa;
 }
 
-.searchbar .mode > span.selected {
+.mode > span.selected {
     color: #0fb2ab;
     background: #0fb2aa10;
     border: 1px solid #0fb2ab;
@@ -170,12 +219,7 @@ table {
     border: 0;
     padding: 5px 10px;
     border-bottom: 1px dashed #aaa;
-}
-
-.searchbar .search button {
-    border-radius: 0;
-    background: transparent;
-    border: 0;
+    font-size: 16px;
 }
 
 .filters button {
@@ -207,9 +251,6 @@ tr.highlight {
     background: #ffff00;
 }
 
-tr.filtered {
-}
-
 tr p {
     margin: 0;
     line-height: 26px;
@@ -222,6 +263,26 @@ td {
 td p.english {
     line-height: 22px;
     font-size: 22px;
+}
+
+table {
+    direction: rtl;
+}
+
+.list {
+    grid-area: list;
+    resize: horizontal;
+    overflow: scroll;
+    font-size: 26px;
+    font-family: "Scheherazade", serif;
+    -webkit-locale: "khw-Arab";
+}
+
+.loading {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 footer {
@@ -239,6 +300,7 @@ footer {
     font-size: 12px;
     font-weight: bold;
     text-align: center;
+    height: min-content;
 }
 
 @media screen and (max-width: 700px) {

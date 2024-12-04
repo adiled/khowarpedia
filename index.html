@@ -15,27 +15,34 @@
 <body>
     <div id="body">
         <div class="toolbar">
-            <div class="searchbar">
+            <div class="config">
+                <div class="explorer">
+                    <input id="explorer" name="explorer" type="checkbox">
+                    <label for="explorer">Explorer</label>
+                </div>
                 <div class="mode">
                     <span data-mode="khowar" role="button">KHW</span>
                     <span class="selected" data-mode="en-ur" role="button">EN/UR</span>
                 </div>
+            </div>
+            <div class="searchbar">
+                🔎
                 <div class="search">
-                    <input type="text" spellcheck="true" placeholder="🔎  Enter word">
-                    <button class="next">↓</button>
-                    <button class="prev">↑</button>
+                    <input type="text" spellcheck="true" placeholder="Enter word">
+                    <button class="next">⬇️</button>
+                    <button class="prev">⬆️</button>
                 </div>
-                <span class="count"></span>
+                <div class="counting">
+                    <span class="current-index"></span>/
+                    <span class="count"></span>
+                </div>
             </div>
         </div>
         <div class="filters">
             <button class="template alphabet"></button>
         </div>
         <div class="list">
-            <div class="alt">
-                <div></div>
-                <div></div>
-            </div>
+            <div class="loading">📚⏳</div>
             <table cellspacing="10">
                 <thead>
                     <tr>
@@ -59,7 +66,7 @@
         <footer>
             <p>Made with ❤️ from The Village White Rock, Booni ⛰️</p>
             <p class="attribution">
-                PRIMARY DATA SOURCE — <a href="http://www.www.webonary.org/rachitrali">Chitrali, Rehmat Aziz - Khowar Academy.</a>
+                PRIMARY DATA SOURCE — <a href="https://www.webonary.org/rachitrali/en/overview/" target="_blank">Chitrali, Rehmat Aziz - Khowar Academy.</a>
             </p>
         </footer>
     </div>
