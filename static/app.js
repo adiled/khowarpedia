@@ -1,8 +1,10 @@
+window.localStorage.removeItem("khowar-dataset");
+
 var LSTORAGE_DATASET = "khowar-alldata";
 var LSTORAGE_MODE = "khowarpedia-mode";
 var LSTORAGE_SEARCH_THRESHOLD = "khowarpedia-search-threshold";
 
-var dataset;
+var dataset = localStorage.getItem("khowar-alldata");
 var khowarAlphabets = [];
 var filtered = [];
 var filteredIdxs = [];
@@ -38,23 +40,11 @@ function prune(limit) {
 
 $(document).ready(function () {
 
-    $scroller = $(".list")
+    $scroller = $(".list");
     $list = $(".list tbody");
     $filters = $(".filters");
-    $explorer = $(".explorer input")
+    $explorer = $(".explorer input");
 
-    window.localStorage.removeItem("khowar-dataset");
-    dataset = window.localStorage.getItem("khowar-alldata");
-
-    if(threshold === 0.3) {
-        $explorer.attr("checked", true);
-    }
-
-    $("[data-mode]").removeClass("selected");
-    $(`[data-mode="${mode}"]`).addClass("selected");
-
-    // todo inital mark mode element selected
-    
     if (dataset) {
         dataset = JSON.parse(dataset);
         onDatasetLoad();
@@ -81,7 +71,80 @@ $(document).ready(function () {
         });
     }
 
-    function setMode() {
+    $explorer.on("input", function(e) {
+        const { checked } = e.target;
+        if(checked) {
+            localStorage.setItem(LSTORAGE_SEARCH_THRESHOLD, 0.3);
+            threshold = 0.3;
+        } else {
+            localStorage.setItem(LSTORAGE_SEARCH_THRESHOLD, 0.01);
+            threshold = 0.01;
+        }
+        configureSearch();
+        searchItems($(".searchbar input").val());
+    })
+
+    $(".searchbar input").on("input", function (e) {
+        var valueChanged = false;
+        if (e.type == 'propertychange') {
+            valueChanged = e.originalEvent.propertyName == 'value';
+        } else {
+            valueChanged = true;
+        }
+        if (valueChanged) {
+            var value = e.target.value;
+            searchItems(value);
+        }
+    });
+
+    $(".searchbar input").on('keydown', function (e) {
+        if (!filteredIdxs.length) return;
+        if (e.key === 'Enter' || e.keyCode === 13) {
+            if(e.shiftKey) {
+                if(filteredCurrent === 0) return;
+                goToPrevItem(); 
+            } else {
+                if(filteredCurrent === filteredIdxs.length - 1) return;
+                goToNextItem();
+            }
+        }
+    });
+
+    $(".searchbar button").on("click", function () {
+        if ($(this).hasClass("next")) {
+            goToNextItem();
+        } else {
+            goToPrevItem();
+       }
+    });
+
+    $("[data-mode]").on("click", function (e) {
+        $("[data-mode]").removeClass("selected");
+        $target = $(e.target)
+        $target.addClass("selected");
+        mode = $target.attr("data-mode");
+        localStorage.setItem(LSTORAGE_MODE, mode);
+        configureSearch();
+        searchItems($(".searchbar input").val());
+        $(".searchbar input").focus()
+        $(".searchbar input").attr("placeholder", mode === 'en-ur' ? "words / الفاظ" : "dar tayek")
+    });
+
+    if(threshold === 0.3) {
+        $explorer.attr("checked", true);
+    }
+
+    $(`[data-mode="${mode}"]`).click();
+
+    function onDatasetLoad() {
+        $(".loading").hide();
+        configureSearch();
+        renderAlphabetFilters();
+        render(25);
+    }
+
+    function configureSearch() {
+        if(!dataset) return;
         var config = {
             includeScore: true,
             useExtendedSearch: true,
@@ -89,13 +152,6 @@ $(document).ready(function () {
             threshold,
         }
         fuse = new Fuse(dataset, config);
-    }
-
-    function onDatasetLoad() {
-        $(".loading").hide();
-        setMode();
-        renderAlphabetFilters();
-        render(25);
     }
 
     function renderAlphabetFilters() {
@@ -206,63 +262,4 @@ $(document).ready(function () {
         filteredCurrent--;
         scrollToCurrent();
     }
-
-    $explorer.on("input", function(e) {
-        const { checked } = e.target;
-        if(checked) {
-            localStorage.setItem(LSTORAGE_SEARCH_THRESHOLD, 0.3);
-            threshold = 0.3;
-        } else {
-            localStorage.setItem(LSTORAGE_SEARCH_THRESHOLD, 0.01);
-            threshold = 0.01;
-        }
-        setMode();
-        searchItems($(".searchbar input").val());
-    })
-
-    $(".searchbar input").on("input", function (e) {
-        var valueChanged = false;
-        if (e.type == 'propertychange') {
-            valueChanged = e.originalEvent.propertyName == 'value';
-        } else {
-            valueChanged = true;
-        }
-        if (valueChanged) {
-            var value = e.target.value;
-            searchItems(value);
-        }
-    });
-
-    $(".searchbar input").on('keydown', function (e) {
-        if (!filteredIdxs.length) return;
-        if (e.key === 'Enter' || e.keyCode === 13) {
-            if(e.shiftKey) {
-                if(filteredCurrent === 0) return;
-                goToPrevItem(); 
-            } else {
-                if(filteredCurrent === filteredIdxs.length - 1) return;
-                goToNextItem();
-            }
-        }
-    });
-
-    $(".searchbar button").on("click", function () {
-        if ($(this).hasClass("next")) {
-            goToNextItem();
-        } else {
-            goToPrevItem();
-       }
-    });
-
-    $("[data-mode]").on("click", function (e) {
-        $("[data-mode]").removeClass("selected");
-        $target = $(e.target)
-        $target.addClass("selected");
-        mode = $target.attr("data-mode");
-        localStorage.setItem(LSTORAGE_MODE, mode);
-        setMode();
-        searchItems($(".searchbar input").val());
-        $(".searchbar input").focus()
-    });
-
 });
