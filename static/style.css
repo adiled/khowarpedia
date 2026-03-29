@@ -1,327 +1,340 @@
 /* arabic */
 @font-face {
-    font-family: "Scheherazade";
-    font-style: normal;
-    font-weight: 400;
-    font-display: swap;
-    src: url(./YA9Ur0yF4ETZN60keViq1kQQtZmptvY.woff2) format("woff2");
-    unicode-range: U+0600-06FF, U+200C-200E, U+2010-2011, U+204F, U+2E41, U+FB50-FDFF, U+FE80-FEFC;
+  font-family: "Scheherazade";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(./YA9Ur0yF4ETZN60keViq1kQQtZmptvY.woff2) format("woff2");
+  unicode-range:
+    U+0600-06FF, U+200C-200E, U+2010-2011, U+204F, U+2E41, U+FB50-FDFF,
+    U+FE80-FEFC;
 }
 /* latin */
 @font-face {
-    font-family: "Scheherazade";
-    font-style: normal;
-    font-weight: 400;
-    font-display: swap;
-    src: url(./YA9Ur0yF4ETZN60keViq1kQQsJmp.woff2) format("woff2");
-    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC,
-        U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+  font-family: "Scheherazade";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(./YA9Ur0yF4ETZN60keViq1kQQsJmp.woff2) format("woff2");
+  unicode-range:
+    U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC,
+    U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF,
+    U+FFFD;
 }
 
 @font-face {
-    font-family: AwamiNastaliqRW;
-    /* font-style: normal; */
-    font-weight: 400;
-    src: url(AwamiNastaliq-Regular.woff2) format("woff2");
+  font-family: AwamiNastaliqRW;
+  /* font-style: normal; */
+  font-weight: 400;
+  src: url(AwamiNastaliq-Regular.woff2) format("woff2");
 }
 
-html, body {
-    margin: 0;
-    padding: 0;
-    height: 100%;
+html,
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
 }
 
 label {
-    font-family: sans-serif;
-    vertical-align: middle;
+  font-family: sans-serif;
+  vertical-align: middle;
 }
 
 input[type="checkbox"] {
-    vertical-align: middle;
+  vertical-align: middle;
 }
 
 #body {
-    position: relative;
-    height: 100%;
-    display: grid;
-    grid-template-areas: 'toolbar toolbar'
-    'filters list'
-    'footer footer';
-    grid-template-columns: min-content 1fr;
-    overflow: hidden;
-    box-sizing: border-box;
-    text-align: right;
+  position: relative;
+  height: 100%;
+  display: grid;
+  grid-template-areas:
+    "toolbar toolbar"
+    "filters list"
+    "footer footer";
+  grid-template-columns: min-content 1fr;
+  overflow: hidden;
+  box-sizing: border-box;
+  text-align: right;
 }
 
 *.template,
 button.template {
-    display: none !important;
+  display: none !important;
 }
 
 .filters button.template {
-    display: none;
+  display: none;
 }
 
 .toolbar {
-    grid-area: toolbar;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-    padding: 4px 1%;
-    width: 100%;
-    box-sizing: border-box;
-    background-color: #fff;
-    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.06);
-    top: 0;
-    left: 0;
-    font-family: sans-serif;
-    min-width: 320px;
+  grid-area: toolbar;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 4px 1%;
+  width: 100%;
+  box-sizing: border-box;
+  background-color: #fff;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+  top: 0;
+  left: 0;
+  font-family: sans-serif;
+  min-width: 320px;
 }
 
 @media screen and (max-width: 425px) {
-    .toolbar {
-        position: fixed;
-        top: 100%;
-        transform: translateY(-100%);
-        flex-direction: column;
-        box-shadow: 0 -1px 2px 0 rgba(0, 0, 0, 0.06);
-    }
+  .toolbar {
+    position: fixed;
+    top: 100%;
+    transform: translateY(-100%);
+    flex-direction: column;
+    box-shadow: 0 -1px 2px 0 rgba(0, 0, 0, 0.06);
+  }
 
-    #body {
-        grid-template-areas: 'footer footer'
-        'filters list'
-        'toolbar toolbar';
-        padding-bottom: 70px;
-    }
+  #body {
+    grid-template-areas:
+      "footer footer"
+      "filters list"
+      "toolbar toolbar";
+    padding-bottom: 70px;
+  }
 }
 
 .filters {
-    grid-area: filters;
-    text-align: center;
-    overflow-y: auto;
+  grid-area: filters;
+  text-align: center;
+  overflow-y: auto;
 }
 
 .filters::-webkit-scrollbar {
-    display: none;
+  display: none;
 }
 
 .list {
-    grid-area: list;
+  grid-area: list;
 }
 
-[role="button"], button {
-    cursor: pointer;
+[role="button"],
+button {
+  cursor: pointer;
 }
 
 .searchbar {
-    display: flex;
-    gap: 2px;
-    align-items: center;
-    justify-content: center;
+  display: flex;
+  gap: 2px;
+  align-items: center;
+  justify-content: center;
 }
 
 .counting {
-    position: absolute;
-    right: 12px;
-    font-size: 14px;
-    color: black;
-    margin-left: auto;
+  position: absolute;
+  right: 12px;
+  font-size: 14px;
+  color: black;
+  margin-left: auto;
 }
 
 .searchbar input {
-    max-width: 120px;
-    caret-color: #0fb2ab;
+  max-width: 120px;
+  caret-color: #0fb2ab;
 }
 
 .searchbar .search {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
 }
 
 .searchbar .search input:focus {
-    border: 0;
-    border-bottom: 1px solid #0fb2ab;
-    box-shadow: none;
-    outline: none;
+  border: 0;
+  border-bottom: 1px solid #0fb2ab;
+  box-shadow: none;
+  outline: none;
 }
 
 .searchbar .search button {
-    width: 24px;
-    height: 24px;
-    font-size: 18px;
-    line-height: 18px;
-    border: 0;
-    background: transparent;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    vertical-align: middle;
+  width: 24px;
+  height: 24px;
+  font-size: 18px;
+  line-height: 18px;
+  border: 0;
+  background: transparent;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  vertical-align: middle;
 }
 
 .searchbar button:active {
-    color: green;
+  color: green;
 }
 
 .config {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
 }
 
 .explorer {
-    border: 1px solid #aaa;
-    border-radius: 6px;
-    padding: 4px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 4px;
-    font-size: 12px;
-    box-shadow: 1px 1px 2px 2px #00000010;
+  border: 1px solid #aaa;
+  border-radius: 6px;
+  padding: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  font-size: 12px;
+  box-shadow: 1px 1px 2px 2px #00000010;
 }
 
 .explorer:has(> input:checked) {
-    box-shadow: none;
+  box-shadow: none;
 }
 
-.explorer input, .explorer label {
-    margin: 0;
-    padding: 0;
+.explorer input,
+.explorer label {
+  margin: 0;
+  padding: 0;
 }
 
 .mode {
-    font-size: 12px;
-    color: #aaa;
+  font-size: 12px;
+  color: #aaa;
 }
 
 .mode > span {
-    padding: 2px 4px;
-    border-radius: 2px;
-    background: #aaaaaa10;
-    border: 1px solid #aaa;
+  padding: 2px 4px;
+  border-radius: 2px;
+  background: #aaaaaa10;
+  border: 1px solid #aaa;
 }
 
 .mode > span.selected {
-    color: #0fb2ab;
-    background: #0fb2aa10;
-    border: 1px solid #0fb2ab;
+  color: #0fb2ab;
+  background: #0fb2aa10;
+  border: 1px solid #0fb2ab;
 }
 
 .searchbar .search {
-    margin: 0 5px;
+  margin: 0 5px;
 }
 
 .searchbar .search input {
-    border: 0;
-    padding: 5px 10px;
-    border-bottom: 1px dashed #aaa;
-    font-size: 16px;
+  border: 0;
+  padding: 5px 10px;
+  border-bottom: 1px dashed #aaa;
+  font-size: 16px;
 }
 
 .filters button {
-    margin: 1px;
-    line-height: 20px;
-    height: 32px;
-    border-radius: 2px;
-    border: 1px solid #c6c6c6;
-    color: #575757;
-    background-color: #fff;
+  margin: 1px;
+  line-height: 20px;
+  height: 32px;
+  border-radius: 2px;
+  border: 1px solid #c6c6c6;
+  color: #575757;
+  background-color: #fff;
 }
 
 .filters button.alphabet {
-    font-size: 16px;
-    width: 28px;
-    height: 28px;
+  font-size: 16px;
+  width: 28px;
+  height: 28px;
 }
 
 .filters button:hover {
-    background-color: #f5f5f5;
+  background-color: #f5f5f5;
 }
 
 .lexeme {
-    font-size: 16px;
-    font-family: serif;
+  font-size: 16px;
+  font-family: serif;
 }
 
 tr.highlight {
-    background: #ffff00;
+  background: #ffff00;
 }
 
 tr p {
-    margin: 0;
-    line-height: 26px;
+  margin: 0;
+  line-height: 26px;
 }
 
 td {
-    vertical-align: top;
+  vertical-align: top;
 }
 
 td p.english {
-    line-height: 22px;
-    font-size: 22px;
+  line-height: 22px;
+  font-size: 22px;
 }
 
 table {
-    direction: rtl;
+  direction: rtl;
 }
 
 .list {
-    grid-area: list;
-    resize: horizontal;
-    overflow: scroll;
-    font-size: 26px;
-    font-family: "Scheherazade", serif;
-    -webkit-locale: "khw-Arab";
+  grid-area: list;
+  resize: horizontal;
+  overflow: scroll;
+  font-size: 26px;
+  font-family: "Scheherazade", serif;
+  -webkit-locale: "khw-Arab";
 }
 
 .loading {
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 footer {
-    grid-area: footer;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
-    left: 0;
-    bottom: 0;
-    padding: 2px 0;
-    background: #000;
-    color: #fff;
-    font-family: sans-serif;
-    font-size: 12px;
-    font-weight: bold;
-    text-align: center;
-    height: min-content;
+  grid-area: footer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  left: 0;
+  bottom: 0;
+  padding: 2px 4px;
+  background: #000;
+  color: #fff;
+  font-family: sans-serif;
+  font-size: 12px;
+  font-weight: bold;
+  text-align: center;
+  height: min-content;
 }
 
 @media screen and (max-width: 700px) {
-    footer {
-        justify-content: space-around;
-    }
+  footer {
+    justify-content: space-around;
+  }
 }
 
 footer p {
-    margin: 0;
-    padding: 1px;
+  margin: 0;
+  padding: 1px;
 }
 
 footer .attribution {
-    font-size: 10px;
-    font-weight: normal;
-    color: #ddd;
+  font-size: 10px;
+  font-weight: normal;
+  color: #ddd;
+}
+
+footer .contrib:link {
+  color: cyan;
 }
 
 footer a,
 footer a:link,
 footer a:visited {
-    color: #ddd;
+  color: #ddd;
 }

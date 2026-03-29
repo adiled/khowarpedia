@@ -1,75 +1,83 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="static/style.css">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="static/style.css" />
     <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6"></script>
     <script src="static/jquery-3.6.0.min.js"></script>
     <script src="static/app.js"></script>
     <title>Khowarpedia - Word Search</title>
-</head>
+  </head>
 
-<body>
+  <body>
     <div id="body">
-        <div class="toolbar">
-            <div class="config">
-                <div class="explorer">
-                    <input id="explorer" name="explorer" type="checkbox">
-                    <label for="explorer">Explorer</label>
-                </div>
-                <div class="mode">
-                    <span data-mode="khowar" role="button">KHW</span>
-                    <span data-mode="en-ur" role="button">EN/UR</span>
-                </div>
-            </div>
-            <div class="searchbar">
-                🔎
-                <div class="search">
-                    <input type="text" spellcheck="true">
-                    <button class="next">⬇️</button>
-                    <button class="prev">⬆️</button>
-                </div>
-                <div class="counting">
-                    <span class="current-index"></span>/
-                    <span class="count"></span>
-                </div>
-            </div>
+      <div class="toolbar">
+        <div class="config">
+          <div class="explorer">
+            <input id="explorer" name="explorer" type="checkbox" />
+            <label for="explorer">Explorer</label>
+          </div>
+          <div class="mode">
+            <span data-mode="khowar" role="button">KHW</span>
+            <span data-mode="en-ur" role="button">EN/UR</span>
+          </div>
         </div>
-        <div class="filters">
-            <button class="template alphabet"></button>
+        <div class="searchbar">
+          🔎
+          <div class="search">
+            <input type="text" spellcheck="true" />
+            <button class="next">⬇️</button>
+            <button class="prev">⬆️</button>
+          </div>
+          <div class="counting">
+            <span class="current-index"></span>/
+            <span class="count"></span>
+          </div>
         </div>
-        <div class="list">
-            <div class="loading">📚⏳</div>
-            <table cellspacing="10">
-                <thead>
-                    <tr>
-                        <th></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr class="template item">
-                        <td>
-                            <p></p>
-                            <p class="lexeme"></p>
-                        </td>
-                        <td>
-                            <p></p>
-                            <p class="english"></p>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-        <footer>
-            <p>Made with ❤️ from The Village White Rock, Booni ⛰️</p>
-            <p class="attribution">
-                PRIMARY DATA SOURCE — <a href="https://www.webonary.org/rachitrali/en/overview/" target="_blank">Chitrali, Rehmat Aziz - Khowar Academy.</a>
-            </p>
-        </footer>
+      </div>
+      <div class="filters">
+        <button class="template alphabet"></button>
+      </div>
+      <div class="list">
+        <div class="loading">📚⏳</div>
+        <table cellspacing="10">
+          <thead>
+            <tr>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="template item">
+              <td>
+                <p></p>
+                <p class="lexeme"></p>
+              </td>
+              <td>
+                <p></p>
+                <p class="english"></p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <footer>
+        <p>Made with ❤️ from The Village White Rock, Booni ⛰️</p>
+        <p class="attribution">
+          PRIMARY DATA SOURCE —
+          <a
+            href="https://www.webonary.org/rachitrali/en/overview/"
+            target="_blank"
+            >Chitrali, Rehmat Aziz - Khowar Academy.</a
+          >&emsp;
+          <a
+            class="contrib"
+            href="https://github.com/adiled/khowarpedia/edit/master/dataset_crowdsourced/all-latin.json"
+            >/ contribue</a
+          >
+        </p>
+      </footer>
     </div>
-</body>
-
+  </body>
 </html>
