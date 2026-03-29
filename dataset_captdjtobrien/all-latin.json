@@ -1,3 +1,9 @@
 [
-    {"alphabet":"ر","word":"رع","lexeme":"rọ","grammar":"adv","translations":[{"urdu":"قدرے","english":"Rather (emphasis on adjective)"}],"latin":"rọ"}
+    {"alphabet":"ر","word":"رع","lexeme":"rọ","grammar":"suffx","translations":[{"urdu":"قدرے","english":"Rather"}],"latin":"rọ"},
+    {"alphabet":"ہ","word":"ہیس","lexeme":"hes","grammar":"nom","translations":[{"urdu":"وہ","english":"He"}],"latin":"hes"},
+    {"alphabet":"ہ","word":"ہیت","lexeme":"het","grammar":"nom","translations":[{"urdu":"وہ","english":"She"}],"latin":"het"},
+    {"alphabet":"ہ","word":"ہسـّـا","lexeme":"hassa","grammar":"nom","translations":[{"urdu":"وہ","english":"It"}],"latin":"hassa"},
+    {"alphabet":"ہ","word":"ہیس","lexeme":"hamo","grammar":"acc,gen","translations":[{"urdu":"وہ، اس کا","english":"Him, of him"}],"latin":"hamo"},
+    {"alphabet":"ہ","word":"ہیت","lexeme":"hattogho","grammar":"acc,gen","translations":[{"urdu":"وہ، اس کا","english":"Her, oh her"}],"latin":"hattogho"},
+    {"alphabet":"ہ","word":"ہسـّـا","lexeme":"horo","grammar":"acc,gen","translations":[{"urdu":"وہ، اس کا","english":"It, of it"}],"latin":"horo"}
 ]

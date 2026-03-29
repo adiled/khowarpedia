@@ -1,8 +1,17 @@
 window.localStorage.removeItem("khowar-dataset");
 
+var LAST_UPDATED = '2025-01-18T11:32:55.196Z';
+
 var LSTORAGE_DATASET = "khowar-alldata";
 var LSTORAGE_MODE = "khowarpedia-mode";
 var LSTORAGE_SEARCH_THRESHOLD = "khowarpedia-search-threshold";
+
+var last_updated = localStorage.getItem("khowar-alldata_last_updated");
+
+if(!last_updated || new Date(last_updated) < new Date(LAST_UPDATED) ) {
+    localStorage.removeItem("khowar-alldata");
+    localStorage.setItem("khowar-alldata_last_updated", LAST_UPDATED);
+}
 
 var dataset = localStorage.getItem("khowar-alldata");
 var khowarAlphabets = [];
@@ -61,12 +70,18 @@ $(document).ready(function () {
                     resolve(data);
                 })
             })),
-        ]).then(([ datasetOne, datasetTwo ]) => {
+            (new Promise((resolve) => {
+                $.getJSON("dataset_captdjtobrien/all-latin.json", (data, status) => {
+                    resolve(data);
+                })
+            })),
+        ]).then(([ datasetOne, datasetTwo, datasetThree ]) => {
             window.localStorage.setItem("khowar-alldata", JSON.stringify([
                 ...datasetOne,
                 ...datasetTwo,
+                ...datasetThree,
             ]));
-            dataset = [...datasetOne, ...datasetTwo];
+            dataset = [...datasetOne, ...datasetTwo, ...datasetThree];
             onDatasetLoad();
         });
     }
@@ -154,6 +169,14 @@ $(document).ready(function () {
         fuse = new Fuse(dataset, config);
     }
 
+    const grammar = [];
+    function renderGrammar() {
+        dataset.map((item) => item.grammar).forEach((item) => {
+            if(!grammar.includes(item))
+                grammar.push(item);
+        });
+    }
+
     function renderAlphabetFilters() {
         dataset.map((item) => item.alphabet)
             .forEach((item) => {
@@ -185,8 +208,8 @@ $(document).ready(function () {
         $($el.find("td > p")[0]).parent().attr("data-alphabet", item.alphabet);
         $($el.find("td > p")[0]).text(`${item.word}`);
         $($el.find("td > p")[1]).text(`${item.lexeme}`);
-        $($el.find("td > p")[3]).text(`${english}`);
         $($el.find("td > p")[2]).text(`${item.translations[0].urdu}`);
+        $($el.find("td > p")[3]).text(`${item.grammar ? item.grammar + ' — ' : ''}${english}`);
         if (!$afterEl) {
             $list.append($el);        
         } else {
